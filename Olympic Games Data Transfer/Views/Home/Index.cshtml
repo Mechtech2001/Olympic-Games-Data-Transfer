@@ -1,0 +1,55 @@
+﻿@model CountryViewModel
+@{
+    ViewData["Title"] = "Olympic Games";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <h3 class="mt-3">Events</h3>
+        <div class="list-group">
+            <a asp-action="Index"
+               asp-route-activeEvent="all"
+               asp-route-activeSport="@Model.ActiveSport"
+               class="list-group-item @Model.CheckActiveEvent("all")">All</a>
+
+            @foreach (Event events in Model.events)
+            {
+                <a asp-action="Index"
+                   asp-route-activeEvent="@events.EventID"
+                   asp-route-activeSport="@Model.ActiveSport"
+                   class="list-group-item @Model.CheckActiveEvent(events.EventName)">@events.EventName</a>
+            }
+        </div>
+
+        <h3 class="mt-3">Sports</h3>
+        <div class="list-group">
+            <a asp-action="Index"
+               asp-route-activeEvent="@Model.ActiveEvent"
+               asp-route-activeSport="all"
+               class="list-group-item @Model.CheckActiveSport("all")">All</a>
+
+            @foreach (Sport sports in Model.sports)
+            {
+                <a asp-action="Index"
+                   asp-route-activeEvent="@Model.ActiveEvent"
+                   asp-route-activeSport="@sports.SportID"
+                   class="list-group-item @Model.CheckActiveSport(sports.SportName)">@sports.SportName</a>
+            }
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <ul class="list-inline">
+            @foreach (Country country in Model.countries)
+            {
+                <li class="list-inline-item">
+                    <img class="thumbnail img-responsive" src="~/images/@country.flag"
+                         alt="@country.CountryName | @(country.events?.EventName ?? "No Event") | @(country.sport?.category ?? "No Sport")"
+                         title="@country.CountryName | @(country.events?.EventName ?? "No Event") | @(country.sport?.category ?? "No Sport")" />
+
+
+                </li>
+            }
+        </ul>
+    </div>
+</div>
