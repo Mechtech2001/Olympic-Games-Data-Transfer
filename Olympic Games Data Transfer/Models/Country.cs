@@ -4,8 +4,9 @@
     {
         public string CountryID { get; set; } = string.Empty;
         public string CountryName { get; set; } = string.Empty;
-        public Sport sport {  get; set; } = null!;
-        public Event events { get; set; } = null!;
-       public string flag {  get; set; } = string.Empty;
+        public string EventID { get; set; } = string.Empty; 
+        public Event events { get; set; } = new Event();
+        public Sport sport { get; set; } = new Sport();
+        public string flag { get; set; } = string.Empty;
     }
 }

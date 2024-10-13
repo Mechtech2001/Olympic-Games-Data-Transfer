@@ -43,10 +43,11 @@
             @foreach (Country country in Model.countries)
             {
                 <li class="list-inline-item">
+                    <a asp-action="Details" asp-route-id="@country.CountryID">
                     <img class="thumbnail img-responsive" src="~/images/@country.flag"
                          alt="@country.CountryName | @(country.events?.EventName ?? "No Event") | @(country.sport?.category ?? "No Sport")"
                          title="@country.CountryName | @(country.events?.EventName ?? "No Event") | @(country.sport?.category ?? "No Sport")" />
-
+                    </a>
 
                 </li>
             }

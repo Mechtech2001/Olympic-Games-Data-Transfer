@@ -2,6 +2,7 @@
 {
     public class CountryViewModel
     {
+        public Country Country { get; set; } = new Country();
         public string ActiveEvent { get; set; } = "all";
         public string ActiveSport { get; set; } = "all";
 

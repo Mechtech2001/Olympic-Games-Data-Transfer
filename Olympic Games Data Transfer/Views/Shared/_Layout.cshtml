@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string controller =
+            ViewContext.RouteData.Values["controller"]?.ToString() ?? " ";
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,10 +29,32 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Details">Detail</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
+        @if (TempData.Keys.Contains("message"))
+        {
+            <h4 class="bg-success p-2">@TempData["message"]</h4>
+        }
+
+        @if (controller != "Favorite")
+        {
+            var session = new OlympicSession(Context.Session);
+            int? count = session.GetMyCountryCount();
+
+            @if (count.HasValue)
+            {
+                <h5 class="bg-info p-2">
+                    <a asp-controller="Favorite" asp-action="Index"
+                       class="text-white">My Favorite Countries</a>
+                    <span class="badge bg-light text-black">@count</span>
+                </h5>
+            }
+        }
     </header>
     <div class="container">
         <main role="main" class="pb-3">
