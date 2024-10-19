@@ -75,7 +75,6 @@ namespace Olympic_Games_Data_Transfer.Controllers
             return View(model);
         }
 
-
         public IActionResult Privacy()
         {
             return View();
